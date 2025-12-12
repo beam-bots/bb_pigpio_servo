@@ -27,7 +27,7 @@ defmodule MyRobot do
         # Define the joint's motion limits
         limit lower: ~u(-90 degree),
               upper: ~u(90 degree),
-              velocity: ~u(60 degree/second)
+              velocity: ~u(60 degree_per_second)
 
         # Attach the servo actuator
         actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
@@ -155,12 +155,12 @@ defmodule PanTiltRobot do
   robot do
     link :base do
       joint :pan, type: :revolute do
-        limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(90 degree/second)
+        limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(90 degree_per_second)
         actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
 
         link :pan_platform do
           joint :tilt, type: :revolute do
-            limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
+            limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree_per_second)
             actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 18}
 
             link :camera_mount do

@@ -26,7 +26,7 @@ defmodule MyRobot do
   robot do
     link :base do
       joint :pan, type: :revolute do
-        limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(60 degree/second)
+        limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(60 degree_per_second)
 
         actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
         sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}

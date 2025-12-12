@@ -24,7 +24,7 @@ defmodule BB.Servo.Pigpio do
   Define a joint with servo actuator in your robot DSL:
 
       joint :shoulder, type: :revolute do
-        limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
+        limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree_per_second)
 
         actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
         sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}
