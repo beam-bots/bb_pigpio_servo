@@ -30,7 +30,7 @@ defmodule MyRobot do
               velocity: ~u(60 degree/second)
 
         # Attach the servo actuator
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
 
         link :head do
           # Child links go here
@@ -61,7 +61,7 @@ These values are used by the actuator to:
 The actuator accepts these options:
 
 ```elixir
-actuator :servo, {BB.PigpioServo.Actuator,
+actuator :servo, {BB.Servo.Pigpio.Actuator,
   pin: 17,           # Required: GPIO pin number
   min_pulse: 500,    # Optional: minimum pulse width in µs (default: 500)
   max_pulse: 2500,   # Optional: maximum pulse width in µs (default: 2500)
@@ -134,7 +134,7 @@ If your servo rotates in the opposite direction to what you expect, use the
 `reverse?` option:
 
 ```elixir
-actuator :servo, {BB.PigpioServo.Actuator,
+actuator :servo, {BB.Servo.Pigpio.Actuator,
   pin: 17,
   reverse?: true
 }
@@ -156,12 +156,12 @@ defmodule PanTiltRobot do
     link :base do
       joint :pan, type: :revolute do
         limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(90 degree/second)
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
 
         link :pan_platform do
           joint :tilt, type: :revolute do
             limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
-            actuator :servo, {BB.PigpioServo.Actuator, pin: 18}
+            actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 18}
 
             link :camera_mount do
               # Camera attached here

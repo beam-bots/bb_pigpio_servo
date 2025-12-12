@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.MixProject do
+defmodule BB.Servo.Pigpio.MixProject do
   use Mix.Project
 
   @moduledoc """
@@ -14,7 +14,7 @@ defmodule BB.PigpioServo.MixProject do
   def project do
     [
       aliases: aliases(),
-      app: :bb_fabrik,
+      app: :bb_servo_pigpio,
       consolidate_protocols: Mix.env() == :prod,
       deps: deps(),
       description: @moduledoc,
@@ -35,7 +35,7 @@ defmodule BB.PigpioServo.MixProject do
       maintainers: ["James Harton <james@harton.nz>"],
       licenses: ["Apache-2.0"],
       links: %{
-        "Source" => "https://github.com/beam-bots/bb_pigpio_servo",
+        "Source" => "https://github.com/beam-bots/bb_servo_pigpio",
         "Sponsor" => "https://github.com/sponsors/jimsynz"
       }
     ]
@@ -58,7 +58,7 @@ defmodule BB.PigpioServo.MixProject do
         Tutorials: ~r/tutorials\//
       ],
       source_ref: "main",
-      source_url: "https://github.com/beam-bots/bb_pigpio_servo"
+      source_url: "https://github.com/beam-bots/bb_servo_pigpio"
     ]
   end
 

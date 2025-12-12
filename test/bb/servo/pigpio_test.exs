@@ -2,6 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServoTest do
+defmodule BB.Servo.PigpioTest do
   use ExUnit.Case
 end

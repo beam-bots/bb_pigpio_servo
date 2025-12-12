@@ -2,13 +2,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.SensorTest do
+defmodule BB.Servo.Pigpio.SensorTest do
   use ExUnit.Case, async: true
   use Mimic
 
   alias BB.Message
-  alias BB.PigpioServo.Message.PositionCommand
-  alias BB.PigpioServo.Sensor
+  alias BB.Servo.Pigpio.Message.PositionCommand
+  alias BB.Servo.Pigpio.Sensor
 
   import BB.Unit
 

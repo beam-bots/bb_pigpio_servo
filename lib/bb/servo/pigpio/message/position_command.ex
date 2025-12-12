@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.Message.PositionCommand do
+defmodule BB.Servo.Pigpio.Message.PositionCommand do
   @moduledoc """
   Message published by the actuator when a position command is sent.
 
-  Used by `BB.PigpioServo.Sensor` to track commanded positions and estimate
+  Used by `BB.Servo.Pigpio.Sensor` to track commanded positions and estimate
   current position during movement.
 
   ## Fields

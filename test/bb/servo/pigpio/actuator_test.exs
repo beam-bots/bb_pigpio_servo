@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.ActuatorTest do
+defmodule BB.Servo.Pigpio.ActuatorTest do
   use ExUnit.Case, async: true
   use Mimic
 
-  alias BB.PigpioServo.Actuator
+  alias BB.Servo.Pigpio.Actuator
 
   @joint_name :test_joint
   @actuator_name :test_servo
@@ -259,7 +259,7 @@ defmodule BB.PigpioServo.ActuatorTest do
 
       assert_receive {:published, TestRobot, [:actuator, @joint_name, @actuator_name], message}
 
-      assert %BB.Message{payload: %BB.PigpioServo.Message.PositionCommand{} = cmd} = message
+      assert %BB.Message{payload: %BB.Servo.Pigpio.Message.PositionCommand{} = cmd} = message
       assert cmd.target == 0.5
       assert is_integer(cmd.expected_arrival)
       assert cmd.expected_arrival > System.monotonic_time(:millisecond)

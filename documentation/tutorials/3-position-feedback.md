@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 # Position Feedback
 
-RC servos don't provide position feedback, but `BB.PigpioServo.Sensor` can
+RC servos don't provide position feedback, but `BB.Servo.Pigpio.Sensor` can
 estimate position based on commanded targets and timing. This tutorial shows you
 how to set up and use position feedback.
 
@@ -28,8 +28,8 @@ defmodule MyRobot do
       joint :pan, type: :revolute do
         limit lower: ~u(-90 degree), upper: ~u(90 degree), velocity: ~u(60 degree/second)
 
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
-        sensor :feedback, {BB.PigpioServo.Sensor, actuator: :servo}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
+        sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}
 
         link :head do
         end
@@ -74,7 +74,7 @@ Time 5000ms: Sync publish at 45° (max_silence reached)
 ## Sensor Options
 
 ```elixir
-sensor :feedback, {BB.PigpioServo.Sensor,
+sensor :feedback, {BB.Servo.Pigpio.Sensor,
   actuator: :servo,           # Required: actuator to subscribe to
   publish_rate: ~u(50 hertz), # Optional: how often to check for changes (default: 50 Hz)
   max_silence: ~u(5 second)   # Optional: max time between publishes (default: 5s)

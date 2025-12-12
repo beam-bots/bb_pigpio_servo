@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 # Getting Started
 
 This guide walks you through setting up your Raspberry Pi to control RC servos
-with BB.PigpioServo.
+with BB.Servo.Pigpio.
 
 ## Hardware Requirements
 
@@ -66,13 +66,13 @@ pigs t  # Should return the current tick count
 
 ### 2. Add Dependencies
 
-Add `bb_pigpio_servo` and `pigpiox` to your `mix.exs`:
+Add `bb_servo_pigpio` and `pigpiox` to your `mix.exs`:
 
 ```elixir
 def deps do
   [
     {:bb, "~> 0.2"},
-    {:bb_pigpio_servo, "~> 0.1"},
+    {:bb_servo_pigpio, "~> 0.1"},
     {:pigpiox, "~> 0.1"}
   ]
 end

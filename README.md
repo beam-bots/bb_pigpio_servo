@@ -6,14 +6,14 @@ SPDX-License-Identifier: Apache-2.0
 
 <img src="https://github.com/beam-bots/bb/blob/main/logos/beam_bots_logo.png?raw=true" alt="Beam Bots Logo" width="250" />
 
-# Beam Bots
+# Beam Bots Pigpio servo control
 
-[![CI](https://github.com/beam-bots/bb_pigpio_servo/actions/workflows/ci.yml/badge.svg)](https://github.com/beam-bots/bb_pigpio_servo/actions/workflows/ci.yml)
+[![CI](https://github.com/beam-bots/bb_servo_pigpio/actions/workflows/ci.yml/badge.svg)](https://github.com/beam-bots/bb_servo_pigpio/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache--2.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Hex version badge](https://img.shields.io/hexpm/v/bb_pigpio_servo.svg)](https://hex.pm/packages/bb_pigpio_servo)
-[![REUSE status](https://api.reuse.software/badge/github.com/beam-bots/bb_pigpio_servo)](https://api.reuse.software/info/github.com/beam-bots/bb_pigpio_servo)
+[![Hex version badge](https://img.shields.io/hexpm/v/bb_servo_pigpio.svg)](https://hex.pm/packages/bb_servo_pigpio)
+[![REUSE status](https://api.reuse.software/badge/github.com/beam-bots/bb_servo_pigpio)](https://api.reuse.software/info/github.com/beam-bots/bb_servo_pigpio)
 
-# BB.PigpioServo
+# BB.Servo.Pigpio
 
 BB integration for driving RC servos via pigpio on Raspberry Pi.
 
@@ -22,12 +22,12 @@ directly connected to Raspberry Pi GPIO pins using the pigpio daemon.
 
 ## Installation
 
-Add `bb_pigpio_servo` to your list of dependencies in `mix.exs`:
+Add `bb_servo_pigpio` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:bb_pigpio_servo, "~> 0.1.0"}
+    {:bb_servo_pigpio, "~> 0.1.0"}
   ]
 end
 ```
@@ -50,8 +50,8 @@ defmodule MyRobot do
       joint :shoulder, type: :revolute do
         limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
 
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
-        sensor :feedback, {BB.PigpioServo.Sensor, actuator: :servo}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
+        sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}
 
         link :arm do
           # ...
@@ -69,7 +69,7 @@ need to specify servo rotation range or speed separately.
 
 ### Actuator
 
-`BB.PigpioServo.Actuator` controls servo position via PWM.
+`BB.Servo.Pigpio.Actuator` controls servo position via PWM.
 
 **Options:**
 
@@ -90,7 +90,7 @@ need to specify servo rotation range or speed separately.
 
 ### Sensor
 
-`BB.PigpioServo.Sensor` provides position feedback by subscribing to actuator commands.
+`BB.Servo.Pigpio.Sensor` provides position feedback by subscribing to actuator commands.
 
 **Options:**
 
@@ -138,4 +138,4 @@ This provides realistic position feedback for trajectory planning and monitoring
 
 ## Documentation
 
-Full documentation is available at [HexDocs](https://hexdocs.pm/bb_pigpio_servo).
+Full documentation is available at [HexDocs](https://hexdocs.pm/bb_servo_pigpio).

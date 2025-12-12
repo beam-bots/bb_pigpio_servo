@@ -2,21 +2,21 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.Sensor do
+defmodule BB.Servo.Pigpio.Sensor do
   @moduledoc """
   A sensor GenServer that subscribes to servo actuator position commands
   and publishes JointState messages at a controlled rate.
 
-  This sensor receives `BB.PigpioServo.Message.PositionCommand` messages from a
-  `BB.PigpioServo.Actuator` and publishes JointState feedback.
+  This sensor receives `BB.Servo.Pigpio.Message.PositionCommand` messages from a
+  `BB.Servo.Pigpio.Actuator` and publishes JointState feedback.
 
   ## Example DSL Usage
 
       joint :shoulder, type: :revolute do
         limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
 
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
-        sensor :feedback, {BB.PigpioServo.Sensor, actuator: :servo}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
+        sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}
       end
   """
   use GenServer
@@ -26,8 +26,8 @@ defmodule BB.PigpioServo.Sensor do
   alias BB.Cldr.Unit, as: CldrUnit
   alias BB.Message
   alias BB.Message.Sensor.JointState
-  alias BB.PigpioServo.Message.PositionCommand
   alias BB.Robot.Units
+  alias BB.Servo.Pigpio.Message.PositionCommand
 
   @options Spark.Options.new!(
              bb: [

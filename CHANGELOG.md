@@ -11,7 +11,7 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
-## [v0.1.0](https://github.com/beam-bots/bb_pigpio_servo/compare/v0.1.0...v0.1.0) (2025-12-10)
+## [v0.1.0](https://github.com/beam-bots/bb_servo_pigpio/compare/v0.1.0...v0.1.0) (2025-12-10)
 
 
 

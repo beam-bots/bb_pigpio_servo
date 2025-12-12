@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo do
+defmodule BB.Servo.Pigpio do
   @moduledoc """
   BB integration for driving RC servos via pigpio on Raspberry Pi.
 
@@ -11,8 +11,8 @@ defmodule BB.PigpioServo do
 
   ## Components
 
-  - `BB.PigpioServo.Actuator` - Controls servo position via PWM
-  - `BB.PigpioServo.Sensor` - Provides position feedback by subscribing to actuator commands
+  - `BB.Servo.Pigpio.Actuator` - Controls servo position via PWM
+  - `BB.Servo.Pigpio.Sensor` - Provides position feedback by subscribing to actuator commands
 
   ## Requirements
 
@@ -26,8 +26,8 @@ defmodule BB.PigpioServo do
       joint :shoulder, type: :revolute do
         limit lower: ~u(-45 degree), upper: ~u(45 degree), velocity: ~u(60 degree/second)
 
-        actuator :servo, {BB.PigpioServo.Actuator, pin: 17}
-        sensor :feedback, {BB.PigpioServo.Sensor, actuator: :servo}
+        actuator :servo, {BB.Servo.Pigpio.Actuator, pin: 17}
+        sensor :feedback, {BB.Servo.Pigpio.Sensor, actuator: :servo}
       end
 
   The actuator automatically derives its configuration from the joint limits - no need

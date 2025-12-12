@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule BB.PigpioServo.Actuator do
+defmodule BB.Servo.Pigpio.Actuator do
   @moduledoc """
   An actuator GenServer that uses Pigpiox to drive a servo.
 
@@ -15,7 +15,7 @@ defmodule BB.PigpioServo.Actuator do
   1. Clamps the position to joint limits
   2. Converts to PWM pulse width
   3. Sends PWM command to pigpiox
-  4. Publishes a `BB.PigpioServo.Message.PositionCommand` for sensors to consume
+  4. Publishes a `BB.Servo.Pigpio.Message.PositionCommand` for sensors to consume
   """
   use GenServer
   import BB.Unit
@@ -23,8 +23,8 @@ defmodule BB.PigpioServo.Actuator do
 
   alias BB.Cldr.Unit, as: CldrUnit
   alias BB.Message
-  alias BB.PigpioServo.Message.PositionCommand
   alias BB.Robot.Units
+  alias BB.Servo.Pigpio.Message.PositionCommand
 
   @options Spark.Options.new!(
              bb: [
