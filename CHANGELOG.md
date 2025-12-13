@@ -11,6 +11,21 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.0](https://github.com/beam-bots/bb_servo_pigpio/compare/v0.1.0...v0.2.0) (2025-12-13)
+
+
+
+
+### Features:
+
+* rename project from bb_pigpio_servo to bb_servo_pigpio by James Harton
+
+* implement constraint-aware servo actuator and feedback sensor by James Harton
+
+### Improvements:
+
+* use standard actuator command interface by James Harton
+
 ## [v0.1.0](https://github.com/beam-bots/bb_servo_pigpio/compare/v0.1.0...v0.1.0) (2025-12-10)
 
 
