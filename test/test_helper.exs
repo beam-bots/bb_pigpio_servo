@@ -8,4 +8,5 @@ ExUnit.start()
 
 Mimic.copy(BB)
 Mimic.copy(BB.Robot)
+Mimic.copy(BB.Safety)
 Mimic.copy(Pigpiox.Socket)
