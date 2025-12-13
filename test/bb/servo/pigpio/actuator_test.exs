@@ -43,6 +43,7 @@ defmodule BB.Servo.Pigpio.ActuatorTest do
 
   defp stub_pigpiox_success do
     stub(Pigpiox.Socket, :command, fn _cmd, _pin, _val -> {:ok, 0} end)
+    stub(BB.Safety, :register, fn _module, _opts -> :ok end)
   end
 
   describe "init/1" do
@@ -294,6 +295,43 @@ defmodule BB.Servo.Pigpio.ActuatorTest do
 
       travel_time_ms = round(1.0 / 1.0 * 1000)
       assert_in_delta expected_arrival, before + travel_time_ms, 50
+    end
+  end
+
+  describe "BB.Safety behaviour" do
+    test "disarm/1 sets servo pulse width to 0" do
+      expect(Pigpiox.Socket, :command, fn :set_servo_pulsewidth, 17, 0 ->
+        {:ok, 0}
+      end)
+
+      assert :ok = Actuator.disarm(pin: 17)
+    end
+
+    test "disarm/1 returns error on failure" do
+      expect(Pigpiox.Socket, :command, fn :set_servo_pulsewidth, 17, 0 ->
+        {:error, :connection_failed}
+      end)
+
+      assert {:error, :connection_failed} = Actuator.disarm(pin: 17)
+    end
+
+    test "init/1 registers with safety controller" do
+      stub(BB.Robot, :get_joint, fn _robot, @joint_name ->
+        joint_with_limits(-0.5, 0.5, 1.0)
+      end)
+
+      stub_pigpiox_success()
+
+      expect(BB.Safety, :register, fn module, opts ->
+        assert module == Actuator
+        assert opts[:robot] == TestRobot
+        assert opts[:path] == [@joint_name, @actuator_name]
+        assert opts[:opts] == [pin: 17]
+        :ok
+      end)
+
+      opts = [bb: default_bb_context(), pin: 17]
+      assert {:ok, _state} = Actuator.init(opts)
     end
   end
 end
