@@ -9,7 +9,7 @@ defmodule BB.Servo.Pigpio.MixProject do
   Beam Bots integration for Pigpio connected RC servos.
   """
 
-  @version "0.3.0"
+  @version "0.3.1"
 
   def project do
     [
