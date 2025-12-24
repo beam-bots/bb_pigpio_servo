@@ -4,7 +4,7 @@
 
 defmodule BB.Servo.Pigpio.Actuator do
   @moduledoc """
-  An actuator GenServer that uses Pigpiox to drive a servo.
+  An actuator that uses Pigpiox to drive a servo.
 
   This actuator derives its configuration from the joint constraints defined in the robot:
   - Position limits from `joint.limits.lower` and `joint.limits.upper`
@@ -23,19 +23,11 @@ defmodule BB.Servo.Pigpio.Actuator do
   (either by command or due to supervisor crash), the servo PWM output is disabled
   by setting the pulse width to 0.
   """
-  use BB.Actuator
   import BB.Unit
   import BB.Unit.Option
 
-  alias BB.Cldr.Unit, as: CldrUnit
-  alias BB.Message
-  alias BB.Message.Actuator.BeginMotion
-  alias BB.Message.Actuator.Command
-  alias BB.Robot.Units
-
-  @impl BB.Actuator
-  def options_schema do
-    Spark.Options.new!(
+  use BB.Actuator,
+    options_schema: [
       pin: [
         type: :pos_integer,
         doc: "The GPIO pin to use for servo output",
@@ -61,8 +53,13 @@ defmodule BB.Servo.Pigpio.Actuator do
         doc: "The servo update frequency",
         default: ~u(50 hertz)
       ]
-    )
-  end
+    ]
+
+  alias BB.Cldr.Unit, as: CldrUnit
+  alias BB.Message
+  alias BB.Message.Actuator.BeginMotion
+  alias BB.Message.Actuator.Command
+  alias BB.Robot.Units
 
   @doc """
   Disable the servo by setting pulse width to 0.
@@ -80,7 +77,7 @@ defmodule BB.Servo.Pigpio.Actuator do
     end
   end
 
-  @impl GenServer
+  @impl BB.Actuator
   def init(opts) do
     with {:ok, state} <- build_state(opts),
          {:ok, _} <-
@@ -175,18 +172,18 @@ defmodule BB.Servo.Pigpio.Actuator do
     {:ok, limits}
   end
 
-  @impl GenServer
+  @impl BB.Actuator
   def handle_info({:bb, _path, %Message{payload: %Command.Position{} = cmd}}, state) do
     {:noreply, state} = do_set_position(cmd.position, cmd.command_id, state)
     {:noreply, state}
   end
 
-  @impl GenServer
+  @impl BB.Actuator
   def handle_cast({:command, %Message{payload: %Command.Position{} = cmd}}, state) do
     do_set_position(cmd.position, cmd.command_id, state)
   end
 
-  @impl GenServer
+  @impl BB.Actuator
   def handle_call({:command, %Message{payload: %Command.Position{} = cmd}}, _from, state) do
     {:noreply, new_state} = do_set_position(cmd.position, cmd.command_id, state)
     {:reply, {:ok, :accepted}, new_state}
